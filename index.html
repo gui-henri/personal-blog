@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astrobio's log</title>
+    <style>
+        /* Estilos globais */
+        :root {
+            --bg-color: #f5f5f5;
+            --text-color: #333;
+            --text-detail: #616161;
+            --header-bg: #333;
+            --header-text: #fff;
+            --post-bg: #fff;
+            --border-color: #ddd;
+        }
+
+        /* Modo escuro */
+        .dark-mode {
+            --bg-color: #1e1e1e;
+            --text-color: #e0e0e0;
+            --text-detail: #c1c1c1;
+            --header-bg: #111;
+            --header-text: #fff;
+            --post-bg: #252525;
+            --border-color: #444;
+        }
+
+        body {
+            min-width: 400px;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1em;
+            }
+
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 10px 0 0 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 15px;
+        }
+
+        nav ul li a {
+            color: var(--header-text);
+            text-decoration: none;
+        }
+
+        .mode-toggle {
+            background: none;
+            border: 1px solid var(--header-text);
+            color: var(--header-text);
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .container {
+            max-width: 800px;
+            min-height: 80vh;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--post-bg);
+            transition: background 0.3s;
+        }
+
+        .post {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 15px;
+        }
+
+        .post-title {
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        .post-date {
+            font-size: 0.9em;
+            color: var(--text-detail);
+        }
+
+        .post-excerpt {
+            margin: 10px 0;
+            color: var(--text-detail);
+        }
+
+        .post a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Astrobio's log</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <button class="mode-toggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+    </header>
+
+    <div class="container">
+        <h2>Most Recent</h2>
+        <article class="post">
+            <h3 class="post-title"><a href="bfs-a-code-challenge.html">Visualizing BFS - A code challenge</a></h3>
+            <p class="post-date">Published in: 01/29/2024</p>
+            <p class="post-excerpt">I once had an algorithm class in college. There, i saw many approaches that could be
+                used to solve countless problems. It was nice, but it turned out being boring. The main reason behind
+                this lied on my teacher, that tried to make me learn dozens of algorithms and how they work, but not
+                even once talked about how they were implemented.</p>
+            <a href="bfs-a-code-challenge.html">Read more</a>
+        </article>
+        <article class="post">
+            <h3 class="post-title"><a href="rust-traits-blew-my-mind.html">Rust traits blew my mind</a></h3>
+            <p class="post-date">Published in: 01/29/2024</p>
+            <p class="post-excerpt">The feeling that you could do better is always there. So i started learning about
+                Rust traits: the better interfaces.</p>
+            <a href="rust-traits-blew-my-mind.html">Read more</a>
+        </article>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Astrobio's log. All rights reserved. I'm just having fun.</p>
+    </footer>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+
+            // Salvar a preferência do usuário no localStorage
+            if (document.body.classList.contains("dark-mode")) {
+                localStorage.setItem("theme", "dark");
+                document.querySelector(".mode-toggle").textContent = "☀️ Light Mode";
+            } else {
+                localStorage.setItem("theme", "light");
+                document.querySelector(".mode-toggle").textContent = "🌙 Dark Mode";
+            }
+        }
+
+        // Aplicar o tema salvo ao carregar a página
+        window.onload = function () {
+            if (localStorage.getItem("theme") === "dark") {
+                document.body.classList.add("dark-mode");
+                document.querySelector(".mode-toggle").textContent = "☀️ Light Mode";
+            }
+        };
+    </script>
+</body>
+
+</html>

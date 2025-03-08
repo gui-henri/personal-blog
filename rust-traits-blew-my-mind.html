@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rust traits blew my mind - Astrobio's log</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <style>
+        /* Estilos globais */
+        :root {
+            --bg-color: #f5f5f5;
+            --text-color: #333;
+            --header-bg: #333;
+            --header-text: #fff;
+            --post-bg: #fff;
+            --border-color: #ddd;
+            --abstract-bg: #fafafa;
+        }
+
+        /* Modo escuro */
+        .dark-mode {
+            --bg-color: #1e1e1e;
+            --text-color: #e0e0e0;
+            --header-bg: #111;
+            --header-text: #fff;
+            --post-bg: #252525;
+            --border-color: #444;
+            --abstract-bg: #2d2d2d;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-width: 400px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 10px 0 0 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 15px;
+        }
+
+        nav ul li a {
+            color: var(--header-text);
+            text-decoration: none;
+        }
+
+        .mode-toggle {
+            background: none;
+            border: 1px solid var(--header-text);
+            color: var(--header-text);
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--post-bg);
+            transition: background 0.3s;
+        }
+
+        article h2 {
+            text-align: center;
+            font-size: 2em;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .post-meta {
+            text-align: center;
+            color: var(--text-color);
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+
+        .abstract {
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            background-color: var(--abstract-bg);
+            margin-bottom: 30px;
+        }
+
+        .abstract p {
+            margin: 5px 0 0 0;
+            text-align: justify;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section h3 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .section p {
+            text-align: justify;
+            line-height: 1.6;
+        }
+
+        footer {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Astrobio's log</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <button class="mode-toggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+    </header>
+
+    <div class="container">
+        <article>
+            <h2>Rust traits blew my mind</h2>
+            <div class="post-meta">
+                <p>Published in: 01/29/2024 | Author: Guilherme Henrique</p>
+            </div>
+
+            <div class="abstract">
+                <strong>Abstract:</strong>
+                <p>
+                    The feeling that you could do better is always there. So i started learning about
+                    Rust traits: the better interfaces.
+                </p>
+            </div>
+            <div class="section">
+                I like OOP. Really. Java was my favorite language for a short while, and it's way of enforcing OOP was
+                one of the selling points to me. It's curious how i never thought about what i was doing (not that i had
+                done anything complex). I just followed the same project structure, patterns and conventinons i learned
+                from an Udemy course and that was it: my new Spring Boot API was ready. Java can be verbose, but the
+                ecosystem is incredible, and the language is very mature. I still like it, but...
+            </div>
+            <div class="section">
+                <h3>...the feeling that you could do better is always there.</h3>
+                <p>
+                    I really like to learn new things and search for the absolute "best" way to do stuff. Often, the
+                    "best" way doesn't exist, but a "better" way always does. This search lend me to the Rust world,
+                    where i discovered about traits.
+                </p>
+            </div>
+
+            <div class="section">
+                <h3>A glorified interface.</h3>
+                <p>
+                    Traits are a way to define a set of methods that a type must implement. It's like an interface, but
+                    with a lot more power:
+                <pre><code class="rust">
+// The trait
+
+trait Animal {
+    fn make_sound(&self);
+}
+
+// The type definitions
+
+struct Dog {
+    name: String
+}
+
+struct Cat {
+    name: String
+}
+
+// The implementations
+
+impl Animal for Dog {
+    fn make_sound(&self) {
+        println!("{} says: Woof!", self.name);
+    }
+}
+
+impl Animal for Cat {
+    fn make_sound(&self) {
+        println!("{} says: Meow!", self.name);
+    }
+}
+                </code></pre>
+                </p>
+                <p>
+                    This is similar to the classic OOP example where you have a base class Animal and two subclasses Dog
+                    and
+                    Cat. The difference is that in Rust, you can implement the trait for any type, even if you don't own
+                    it.
+                </p>
+                <pre><code class="rust">
+impl Animal for i32 {
+    fn make_sound(&self) -> &'static str {
+        println!("i32!");
+    }
+}
+                </code></pre>
+                <p>
+                    Without having to create any kind of wrapper, i was able to extend the functionality of an existing
+                    type
+                    (and i don't even own it!). Here i used an i32, but it could be a type from a third party library.
+                    You
+                    get all the benefits from interfaces, but with a lot more flexibility.
+                </p>
+
+                <p>
+                    This can't be done in Java, for example, because the only way to add methods to a class is by
+                    implementing it on the class definition.
+                </p>
+
+                <pre><code class="java">
+//you can only implement it when you define the class
+class Dog implements Animal { 
+    public void makeSound() {
+        System.out.println("Woof!");
+    }
+}
+                </code></pre>
+                <p>
+                    But you usually don't have access to the source code of the classes you use (and even if you do,
+                    it's usually better to keep it the way it is), so you can't implement interfaces on them.
+                </p>
+            </div>
+
+            <div class="section">
+                <h3>Conclusion</h3>
+                <p>
+                    Rust is punching me on the face a lot (i'm still learning how to punch back), but those little
+                    differences from other languages really make it stand out. I hope you enjoyed this post, and if you
+                    have any questions or suggestions, feel free to contact me. Let's talk about C# or idk.
+                </p>
+            </div>
+        </article>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Astrobio's log. All rights reserved. I'm just having fun.</p>
+    </footer>
+
+    <script>
+        hljs.highlightAll();
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+
+            // Salvar a preferência do usuário no localStorage
+            if (document.body.classList.contains("dark-mode")) {
+                localStorage.setItem("theme", "dark");
+                document.querySelector(".mode-toggle").textContent = "☀️ Light Mode";
+            } else {
+                localStorage.setItem("theme", "light");
+                document.querySelector(".mode-toggle").textContent = "🌙 Dark Mode";
+            }
+        }
+
+        // Aplicar o tema salvo ao carregar a página
+        window.onload = function () {
+            if (localStorage.getItem("theme") === "dark") {
+                document.body.classList.add("dark-mode");
+                document.querySelector(".mode-toggle").textContent = "☀️ Light Mode";
+            }
+        };
+    </script>
+</body>
+
+</html>

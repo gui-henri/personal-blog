@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astrobio's log</title>
+    <style>
+        /* Estilos globais */
+        :root {
+            --bg-color: #f5f5f5;
+            --text-color: #333;
+            --text-detail: #616161;
+            --header-bg: #333;
+            --header-text: #fff;
+            --post-bg: #fff;
+            --border-color: #ddd;
+        }
+
+        /* Modo escuro */
+        .dark-mode {
+            --bg-color: #1e1e1e;
+            --text-color: #e0e0e0;
+            --text-detail: #c1c1c1;
+            --header-bg: #111;
+            --header-text: #fff;
+            --post-bg: #252525;
+            --border-color: #444;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-width: 400px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 10px 0 0 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 15px;
+        }
+
+        nav ul li a {
+            color: var(--header-text);
+            text-decoration: none;
+        }
+
+        .mode-toggle {
+            background: none;
+            border: 1px solid var(--header-text);
+            color: var(--header-text);
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            min-height: 80vh;
+            background-color: var(--post-bg);
+            transition: background 0.3s;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section h3,
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .section p {
+            text-align: justify;
+            line-height: 1.6;
+        }
+
+        .post {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 15px;
+        }
+
+        .post-title {
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        .post-date {
+            font-size: 0.9em;
+            color: var(--text-detail);
+        }
+
+        .post-excerpt {
+            margin: 10px 0;
+            color: var(--text-detail);
+        }
+
+        .post a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Astrobio's log</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <button class="mode-toggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+    </header>
+    <div class="container">
+        <div class="section">
+            <h2>About this blog</h2>
+            <p>
+                Welcome! I'm Guilherme Henrique. I'm a software engineer and i'm here to talk about technology and
+                thoughts.
+                My journey has been shaped by curiosity, innovation, and a drive to make an impact.
+            </p>
+        </div>
+
+        <p>I started my career by participating in the Junior Enterprise Movement (MEJ), where I developed essential
+            soft skills and had the opportunity to positively influence other young professionals. A year later, i
+            started working as a Data Scientist intern at the Tribunal de Contas do Estado de Pernambuco (TCE). Over the
+            years, I
+            have honed my expertise in Python, JavaScript, Flutter, C++, React, and Next.js, always striving for
+            efficiency and innovation.</p>
+        <p>
+            Today, i'm working as a reseacher at Federal Rural University of Pernambuco
+            (UFRPE), mostly continuing my works at TCE and finishing my research.
+        </p>
+        <h2>Professional Experience</h2>
+        <p>
+        <h3>📊 Researcher at UFRPE</h3>
+        Continuing my research from the Tribunal de Contas do Estado de Pernambuco (TCE), I specialize in data
+        extraction, processing, and API development for data mining solutions.
+        </p>
+
+        <p>
+        <h3>🧠 AI & Data Mining Intern at TCE</h3>
+        At TCE, I worked on machine learning models, AI-driven data analysis, and automated scripts to enhance data
+        processing and integration with databases.
+        </p>
+        <p>
+        <h3>🚀 Project Analyst at Seed a Bit</h3>
+        I have been working at Seed a Bit Tecnologia, a junior enterprise, where I focus on problem-solving and
+        software development.
+        </p>
+    </div>
+
+
+    <footer>
+        <p>&copy; 2025 Astrobio's log. All rights reserved. I'm just having fun.</p>
+    </footer>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+
+            // Salvar a preferência do usuário no localStorage
+            if (document.body.classList.contains("dark-mode")) {
+                localStorage.setItem("theme", "dark");
+                document.querySelector(".mode-toggle").textContent = "☀️ Light Mode";
+            } else {
+                localStorage.setItem("theme", "light");
+                document.querySelector(".mode-toggle").textContent = "🌙 Dark Mode";
+            }
+        }
+
+        // Aplicar o tema salvo ao carregar a página
+        window.onload = function () {
+            if (localStorage.getItem("theme") === "dark") {
+                document.body.classList.add("dark-mode");
+                document.querySelector(".mode-toggle").textContent = "☀️ Light Mode";
+            }
+        };
+    </script>
+</body>
+
+</html>
